@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heatwave Intelligence Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-main">HEATWAVE INTELLIGENCE PLATFORM</span>
+        <span class="brand-divider">/</span>
+        <span class="brand-sub">NATIONAL CLIMATE OPERATIONS · IMD</span>
+      </div>
+      <div class="top-meta">
+        <span class="updated">◷ Last updated: 08:30 IST</span>
+        <span class="user-chip">●</span>
+        <span class="user-name">Piyush - 16010124173</span>
+      </div>
+    </header>
+
+    <nav class="nav">
+      <div class="nav-left">
+        <button class="nav-item active" data-tab="Overview">Overview</button>
+        <button class="nav-item" data-tab="Forecasts">Forecasts</button>
+        <button class="nav-item" data-tab="AWS Monitoring">AWS Monitoring</button>
+        <button class="nav-item" data-tab="Hotspots">Hotspots</button>
+        <button class="nav-item" data-tab="Advisories">Advisories</button>
+        <button class="nav-item" data-tab="Reports">Reports</button>
+      </div>
+      <div class="grid-live"><span></span> GRID LIVE · 1600 × 860</div>
+    </nav>
+
+    <main>
+      <section class="title-row">
+        <div>
+          <h1>Heatwave Overview <small>SYNOPTIC CYCLE 08:30 IST</small></h1>
+          <p>Region-wise forecast, local observations and actionable advisories.</p>
+        </div>
+        <div class="controls">
+          <span class="cycle"><i></i> Cycle Active (08:30 IST)</span>
+          <span>▣ Today, 28 May 2025</span>
+          <span>◉ All India Matrix⌄</span>
+        </div>
+      </section>
+
+      <section class="dashboard-grid top-grid">
+        <article class="card map-card">
+          <div class="card-head">
+            <div>
+              <b>NATIONAL HEAT RISK ASSESSMENT</b>
+              <span>Synoptic Surface Gridded Matrix · 0.25° Resolution</span>
+            </div>
+            <span class="run">● WRF Run: 00 UTC Valid</span>
+          </div>
+          <div class="map-area">
+            <div class="india-shape"></div>
+            <div class="region r1"></div>
+            <div class="region r2"></div>
+            <div class="region r3"></div>
+            <div class="region r4"></div>
+            <div class="city c1"><strong>New Delhi</strong> 40.8°C</div>
+            <div class="city c2"><strong>Barmar</strong> 42.6°C</div>
+            <div class="city c3"><strong>Prayagraj</strong> 41.3°C</div>
+            <div class="city critical c4"><strong>Nagpur</strong> 43.8°C</div>
+            <div class="city critical c5"><strong>Chandrapur</strong> 44.0°C</div>
+            <div class="isoline"></div>
+          </div>
+        </article>
+
+        <article class="card risk-card">
+          <div class="card-head"><b>TODAY'S RISK SUMMARY</b><span class="badge red">SEVERE ALERT</span></div>
+          <div class="risk-line"><span>HEATWAVE RISK</span><strong class="danger">● Severe</strong></div>
+          <div class="risk-line"><span>HIGHEST-RISK REGION</span><strong>Central India &amp; Vidarbha</strong></div>
+          <div class="risk-line"><span>MAX TEMP (ENSEMBLE)</span><strong class="big">43.2°C <em>(Peak 44.0°)</em></strong></div>
+          <div class="risk-line"><span>ACTIVE STATIONS</span><strong>18 / 18 <small>Operational</small></strong></div>
+          <div class="confidence">
+            <div><span>FORECAST CONFIDENCE</span><b>High (94%)</b></div>
+            <div class="bar"><i></i></div>
+          </div>
+          <div class="risk-line"><span>ACTIVE VALIDITY</span><strong>10:00 – 18:30 IST</strong></div>
+          <div class="model">IMD NWP-WRF v4.3 <span>Resolution 0.05°</span></div>
+        </article>
+
+        <article class="card advisory-card">
+          <div class="advisory-title"><span>△ RED ADVISORY</span><small>Issued 07:45 IST</small></div>
+          <p class="protocol">PROTOCOL REFERENCE: NDMA-4A</p>
+          <h3>Extreme heatwave conditions across Central India &amp; Vidarbha basin.</h3>
+          <p>Wet-bulb temperatures exceed <b>31.5°C</b> trigger mandatory cooling protocols, hospital emergency surge readiness, and public outdoor labor halts.</p>
+          <div class="jurisdiction">
+            <b>Target Jurisdictions (14 EOCs):</b><br>
+            Nagpur, Chandrapur, Akola, Wardha, Jabalpur &amp; Bīlaspur districts.
+          </div>
+          <div class="halt">◉ Mandatory labor cessation 11:00 – 16:00 IST</div>
+          <button class="advisory-btn">View Advisory →</button>
+          <span class="sms">♧ Distribute SMS Alerts</span>
+        </article>
+      </section>
+
+      <section class="dashboard-grid bottom-grid">
+        <article class="card region-card">
+          <div class="card-head"><b>REGIONAL FORECAST</b><span>Peak Outlook</span></div>
+          <div class="region-row"><span>Central India (Vidarbha)</span><b>Max 43.8°C</b><em>Severe</em></div>
+          <div class="region-row"><span>Northern Plains (NCR)</span><b>Max 41.8°C</b><em>Watch</em></div>
+          <div class="region-row"><span>East Gangetic Basin</span><b>Max 40.4°C</b><em>Watch</em></div>
+          <div class="region-row"><span>Western Coastal Belt</span><b>Max 35.2°C</b><em>Normal</em></div>
+        </article>
+
+        <article class="card aws-card">
+          <div class="card-head"><b>AWS MONITORING <span class="dot"></span></b><span class="live">● Live 15s ping</span></div>
+          <div class="station"><div><b>AWS-09 Nagpur Airfield</b><span>Sensor Lat 21.09°N · 24% RH</span></div><strong>42.8°C <em>Critical</em></strong></div>
+          <div class="station"><div><b>AWS-04 Prayagraj Civil</b><span>Sensor Lat 25.43°N · 31% RH</span></div><strong>41.9°C <em class="amber">Elevated</em></strong></div>
+          <div class="station"><div><b>AWS-12 Barmer Border</b><span>Sensor Lat 25.75°N · 18% RH</span></div><strong>42.1°C <em class="amber">Elevated</em></strong></div>
+        </article>
+
+        <article class="card chart-card">
+          <div class="card-head"><b>7-DAY TEMPERATURE TREND</b><span>Peak: <b class="danger">44.0°C</b></span></div>
+          <svg viewBox="0 0 390 120" preserveAspectRatio="none" class="chart">
+            <line x1="20" y1="94" x2="370" y2="94" class="axis"/>
+            <line x1="20" y1="55" x2="370" y2="55" class="threshold"/>
+            <polyline points="20,84 75,76 128,66 184,59 238,37 293,49 350,65" class="trend"/>
+            <circle cx="238" cy="37" r="4" class="peak-dot"/>
+            <text x="230" y="25">44.0°</text>
+            <text x="22" y="112">25 M</text><text x="75" y="112">26 M</text><text x="127" y="112">27 M</text>
+            <text x="181" y="112">Today</text><text x="288" y="112">29 M</text><text x="340" y="112">30 M</text>
+          </svg>
+          <div class="threshold-label"><span>●</span> Red Line Threshold: 42°C Warning <b>Peak Anticipated Today</b></div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <div id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
