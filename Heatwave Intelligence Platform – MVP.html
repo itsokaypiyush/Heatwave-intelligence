@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Heatwave Intelligence Platform – MVP</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f5f1;--card:#fff;--ink:#1c2321;--mut:#68716d;--line:#e3e1da;--acc:#1a5c4f;--acc2:#e8f1ee;
+--c0:#2e8b57;--c1:#d9a21b;--c2:#e8762d;--c3:#c62828}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121715;--card:#1b2220;--ink:#e8ece9;--mut:#93a09a;--line:#2d3633;--acc:#4fb39d;--acc2:#1f2f2b}}
+:root[data-theme="dark"]{--bg:#121715;--card:#1b2220;--ink:#e8ece9;--mut:#93a09a;--line:#2d3633;--acc:#4fb39d;--acc2:#1f2f2b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0}
+button,select,input{font:inherit;color:inherit}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:9px 14px;cursor:pointer;font-weight:600}
+:root[data-theme="dark"] .btn{color:#0b1512}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:default}
+/* login */
+#login{display:grid;grid-template-columns:1.1fr 1fr;min-height:100vh}
+.hero{background:linear-gradient(160deg,#2b1d14,#7a3b17 55%,#d98a3d);color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero small{letter-spacing:.18em;opacity:.8;font-size:11px}
+.hero h2{font-size:34px;margin:10px 0}
+.lform{display:flex;flex-direction:column;justify-content:center;padding:48px;max-width:460px;width:100%;margin:auto}
+.lform label{font-size:11px;letter-spacing:.1em;color:var(--mut);margin:14px 0 5px;display:block}
+.lform input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+.note{font-size:12px;color:var(--mut);margin-top:16px}
+@media(max-width:760px){#login{grid-template-columns:1fr}.hero{padding:28px;min-height:200px}.lform{padding:28px}}
+/* app */
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 18px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--acc);letter-spacing:.06em;font-size:12px}
+nav{display:flex;gap:4px;padding:0 12px;overflow-x:auto}
+nav button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px;cursor:pointer;color:var(--mut);white-space:nowrap}
+nav button.on{color:var(--acc);border-color:var(--acc);font-weight:600}
+main{padding:18px;max-width:1180px;margin:auto}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card h3{font-size:15px;margin-bottom:10px}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700;color:#fff}
+.l0{background:var(--c0)}.l1{background:var(--c1)}.l2{background:var(--c2)}.l3{background:var(--c3)}
+.kv{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border:0}
+.mut{color:var(--mut)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th,td{padding:8px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+.cell{border-radius:6px;color:#fff;font-weight:600;padding:4px 8px;display:inline-block;min-width:48px}
+.banner{border-left:4px solid var(--c3);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c3);border-radius:10px;padding:12px 16px;margin-bottom:14px}
+select{padding:7px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%}
+textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--card)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tile{cursor:pointer}
+.tile:hover{opacity:.85}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<section id="login">
+  <div class="hero"><small>CLIMATE INTELLIGENCE</small><h2>From heat data to timely action.</h2><small>MONITORING • FORECASTING • EARLY WARNING</small></div>
+  <div class="lform">
+    <small class="brand">HEATWAVE INTELLIGENCE PLATFORM</small>
+    <h2 style="margin:8px 0 4px;font-size:26px">Welcome back</h2>
+    <div class="mut">Sign in to access forecasts, monitoring and advisories.</div>
+    <label>EMAIL ADDRESS</label><input id="em" value="analyst@agency.gov.in">
+    <label>PASSWORD</label><input id="pw" type="password" value="demo1234">
+    <label>ROLE</label>
+    <select id="role" style="width:100%"><option>Analyst</option><option>Reviewer</option></select>
+    <button class="btn" style="margin-top:20px" onclick="signIn()">Sign in</button>
+    <div class="note">Demo build: any credentials work. Reviewers can approve and send advisories; analysts can only draft them. Data shown is simulated.</div>
+  </div>
+</section>
+
+<section id="app" class="hidden">
+  <header>
+    <div class="top"><span class="brand">HEATWAVE INTELLIGENCE PLATFORM</span>
+      <span class="row mut"><span id="clock"></span><span id="who"></span><button class="btn ghost" onclick="signOut()">Sign out</button></span></div>
+    <nav id="nav"></nav>
+  </header>
+  <main id="view"></main>
+</section>
+
+<script>
+const $=s=>document.querySelector(s);
+const LV=["Normal","Watch","Heatwave","Severe"];
+// IMD-style thresholds: plains 40C, coastal 37C, hills 30C; departure >=4.5 heatwave, >=6.5 severe
+const TH={plains:40,coast:37,hills:30};
+const REG=[
+ {id:"ci",n:"Central India (Vidarbha)",t:44.8,nm:38.0,type:"plains",x:150,y:170,w:130,h:90},
+ {id:"nw",n:"Northwest Plains",t:42.6,nm:37.5,type:"plains",x:110,y:90,w:120,h:70},
+ {id:"eg",n:"East Gangetic Plain",t:41.2,nm:37.0,type:"plains",x:240,y:130,w:110,h:70},
+ {id:"wc",n:"Western Coast",t:36.1,nm:33.5,type:"coast",x:60,y:170,w:80,h:100},
+ {id:"sp",n:"South Peninsula",t:35.4,nm:33.8,type:"plains",x:140,y:270,w:130,h:90},
+ {id:"ne",n:"Northeast",t:33.0,nm:31.0,type:"plains",x:360,y:100,w:80,h:70},
+ {id:"hm",n:"Western Himalaya",t:31.5,nm:26.0,type:"hills",x:140,y:20,w:130,h:60}
+];
+const AWS=[
+ {id:"AWS-09",n:"Nagpur Airfield",r:"ci",b:44.6,rh:24},{id:"AWS-04",n:"Prayagraj Civil",r:"eg",b:41.9,rh:31},
+ {id:"AWS-12",n:"Barmer Border",r:"nw",b:42.5,rh:18},{id:"AWS-15",n:"Chandrapur Depot",r:"ci",b:45.1,rh:22},
+ {id:"AWS-21",n:"Mumbai Santacruz",r:"wc",b:36.4,rh:58},{id:"AWS-27",n:"Dehradun Valley",r:"hm",b:31.2,rh:35}
+];
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function level(r,t){const d=t-r.nm,th=TH[r.type];
+ if((t>=th&&d>=6.5)||t>=47)return 3; if(t>=th&&d>=4.5)return 2; if(t>=th-2||d>=3)return 1; return 0}
+// Forecast: seeded random walk with mild cooling after day 4 (placeholder for the trained ML model)
+function forecast(r){const g=rng(r.id.charCodeAt(0)*131+r.id.charCodeAt(1));let v=r.t;const a=[r.t];
+ for(let i=1;i<7;i++){v+=(g()-.5)*1.7-(i>3?.5:0);a.push(+v.toFixed(1))}return a}
+REG.forEach(r=>{r.f=forecast(r);r.lv=level(r,r.t);r.peak=Math.max(...r.f)});
+AWS.forEach(s=>{s.t=s.b});
+const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return i?d.toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"Today"});
+const reg=id=>REG.find(r=>r.id===id);
+let tab="Overview",sel="ci",role="Analyst",log=[],adv={};
+const TABS=["Overview","Forecasts","AWS Monitoring","Hotspots","Advisories"];
+
+function signIn(){role=$("#role").value;$("#login").classList.add("hidden");$("#app").classList.remove("hidden");
+ $("#who").textContent=$("#em").value+" · "+role;show()}
+function signOut(){$("#app").classList.add("hidden");$("#login").classList.remove("hidden")}
+function show(){$("#nav").innerHTML=TABS.map(t=>`<button class="${t===tab?"on":""}" onclick="tab='${t}';show()">${t}</button>`).join("");render()}
+function pill(l){return `<span class="pill l${l}">${LV[l]}</span>`}
+function cell(r,t){return `<span class="cell l${level(r,t)}">${t.toFixed(1)}°</span>`}
+function selector(){return `<select onchange="sel=this.value;render()">${REG.map(r=>`<option value="${r.id}" ${r.id===sel?"selected":""}>${r.n}</option>`).join("")}</select>`}
+
+function trend(r){const W=520,H=190,p=30,min=Math.min(...r.f,TH[r.type])-2,max=Math.max(...r.f,TH[r.type])+2;
+ const X=i=>p+i*(W-2*p)/6,Y=v=>H-p-(v-min)/(max-min)*(H-2*p);
+ const line=r.f.map((v,i)=>(i?"L":"M")+X(i)+","+Y(v)).join("");
+ return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="7-day max temperature forecast">
+ <line x1="${p}" x2="${W-p}" y1="${Y(TH[r.type])}" y2="${Y(TH[r.type])}" stroke="var(--c3)" stroke-dasharray="5 4"/>
+ <text x="${W-p}" y="${Y(TH[r.type])-5}" text-anchor="end" font-size="11" fill="var(--c3)">Heatwave threshold ${TH[r.type]}°C</text>
+ <path d="${line}" fill="none" stroke="var(--acc)" stroke-width="2.5"/>
+ ${r.f.map((v,i)=>`<circle cx="${X(i)}" cy="${Y(v)}" r="4" fill="var(--acc)"/><text x="${X(i)}" y="${Y(v)-9}" text-anchor="middle" font-size="11" fill="var(--ink)">${v}</text><text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="var(--mut)">${days[i]}</text>`).join("")}</svg>`}
+
+function overview(){
+ const top=[...REG].sort((a,b)=>b.t-a.t)[0],worst=Math.max(...REG.map(r=>r.lv)),r=reg(sel);
+ const conf=88+Math.round(rng(7)()*6);
+ return `${worst>=2?`<div class="banner"><b>${LV[worst]} heatwave alert.</b> ${REG.filter(x=>x.lv>=2).map(x=>x.n).join(", ")} above threshold. <a href="#" onclick="tab='Advisories';sel='${top.id}';show();return false">Draft advisories →</a></div>`:""}
+ <div class="grid g3">
+  <div class="card"><h3>Today's risk summary</h3>
+   <div class="kv"><span class="mut">Heatwave risk</span>${pill(worst)}</div>
+   <div class="kv"><span class="mut">Highest-risk region</span><b>${top.n}</b></div>
+   <div class="kv"><span class="mut">Max temp (ensemble)</span><b>${top.t}°C <span class="mut">(peak ${top.peak}°)</span></b></div>
+   <div class="kv"><span class="mut">Active stations</span><b>${AWS.length} / ${AWS.length} operational</b></div>
+   <div class="kv"><span class="mut">Forecast confidence</span><b>${conf}%</b></div></div>
+  <div class="card"><h3>Regional forecast (peak outlook)</h3>
+   ${[...REG].sort((a,b)=>b.peak-a.peak).map(x=>`<div class="kv"><span>${x.n}</span><span>${x.peak}° ${pill(level(x,x.peak))}</span></div>`).join("")}</div>
+  <div class="card"><h3>AWS monitoring <span class="mut" style="font-weight:400;font-size:12px">· live (simulated)</span></h3>
+   <div id="awsmini">${awsMini()}</div></div>
+ </div>
+ <div class="card" style="margin-top:14px"><div class="row" style="justify-content:space-between"><h3>7-day temperature trend</h3>${selector()}</div>${trend(r)}</div>`}
+function awsMini(){return AWS.slice(0,4).map(s=>{const l=level(reg(s.r),s.t);return `<div class="kv"><span>${s.id} ${s.n}</span><span>${s.t.toFixed(1)}° ${pill(l)}</span></div>`}).join("")}
+
+function forecasts(){return `<div class="card scroll"><h3>7-day max temperature forecast by region</h3><table><tr><th>Region</th>${days.map(d=>`<th>${d}</th>`).join("")}</tr>
+ ${REG.map(r=>`<tr><td>${r.n}</td>${r.f.map(v=>`<td>${cell(r,v)}</td>`).join("")}</tr>`).join("")}</table>
+ <p class="mut">Severity uses IMD-style rules: max temp at or above the regional threshold (plains 40°C, coast 37°C, hills 30°C) with departure from normal of 4.5°C (heatwave) or 6.5°C (severe). Forecast engine is a placeholder; plug the trained model in at <code>forecast()</code>.</p></div>`}
+
+function awsView(){return `<div class="grid g3">${AWS.map(s=>{const r=reg(s.r),l=level(r,s.t),err=(s.t-r.f[0]);
+ return `<div class="card"><div class="row" style="justify-content:space-between"><b>${s.id}</b>${pill(l)}</div>
+ <div class="mut">${s.n} · ${r.n}</div><div style="font-size:30px;font-family:Georgia;margin:8px 0">${s.t.toFixed(1)}°C</div>
+ <div class="kv"><span class="mut">Humidity</span><b>${s.rh}% RH</b></div>
+ <div class="kv"><span class="mut">Forecast today</span><b>${r.f[0]}°C</b></div>
+ <div class="kv"><span class="mut">Observed − forecast</span><b>${err>0?"+":""}${err.toFixed(1)}°C</b></div></div>`}).join("")}</div>
+ <p class="mut">Readings tick every 4 s from simulated sensors. Replace with the AWS ingestion endpoint (MQTT/HTTP) to go live.</p>`}
+
+function hotspots(){const r=reg(sel);
+ return `<div class="grid g3"><div class="card" style="grid-column:span 2;min-width:280px"><h3>Heat hotspot map (schematic)</h3>
+ <svg viewBox="0 0 470 380" width="100%">${REG.map(x=>`<g class="tile" onclick="sel='${x.id}';render()"><rect x="${x.x}" y="${x.y}" width="${x.w}" height="${x.h}" rx="14" fill="var(--c${x.lv})" opacity="${x.id===sel?1:.8}" stroke="${x.id===sel?"var(--ink)":"none"}" stroke-width="3"/><text x="${x.x+x.w/2}" y="${x.y+x.h/2-2}" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">${x.n.split(" (")[0]}</text><text x="${x.x+x.w/2}" y="${x.y+x.h/2+14}" text-anchor="middle" fill="#fff" font-size="12">${x.t}°C</text></g>`).join("")}</svg></div>
+ <div class="card"><h3>${r.n}</h3>${pill(r.lv)}
+ <div class="kv"><span class="mut">Max temp today</span><b>${r.t}°C</b></div>
+ <div class="kv"><span class="mut">Normal</span><b>${r.nm}°C</b></div>
+ <div class="kv"><span class="mut">Departure</span><b>+${(r.t-r.nm).toFixed(1)}°C</b></div>
+ <div class="kv"><span class="mut">Peak (7 days)</span><b>${r.peak}°C</b></div>
+ <button class="btn" style="margin-top:12px" onclick="tab='Advisories';show()">Create advisory</button></div></div>`}
+
+const TPL={
+ "Public health":l=>l>=3?"RED ALERT: Avoid outdoor activity 11:00–16:00. Hydrate every 30 min, open cooling centres, check on elderly and children, and watch for heat-stroke signs (confusion, no sweating, high fever).":l==2?"ORANGE ALERT: Limit outdoor exposure at midday, drink water regularly, wear light cotton clothing. Hospitals should stock ORS and cooling supplies.":"Be heat aware: stay hydrated and avoid strenuous work in peak afternoon hours.",
+ "Agriculture":l=>l>=2?"Shift field work to early morning/evening. Irrigate in the evening, mulch to hold moisture, protect livestock with shade and water, and delay spraying and harvest during peak heat.":"Monitor crop water stress and plan irrigation ahead of the warm spell.",
+ "Municipal / Disaster authority":l=>l>=2?"Activate heat action plan: stagger work hours for outdoor labour, open shaded water points, extend hospital readiness, and pre-position response teams in affected districts.":"Keep heat action plan on standby and review water-point readiness."};
+function advisories(){const r=reg(sel);
+ return `<div class="row" style="margin-bottom:12px"><b>Region</b>${selector()}${pill(r.lv)}<span class="mut">${r.t}°C today · peak ${r.peak}°C</span></div>
+ <div class="grid g3">${Object.keys(TPL).map(k=>{const key=r.id+"|"+k,a=adv[key]||(adv[key]={text:TPL[k](r.lv),st:"Draft"});
+ const canR=role==="Reviewer";
+ return `<div class="card"><div class="row" style="justify-content:space-between"><h3>${k}</h3><span class="pill l${a.st==="Sent"?0:a.st==="Reviewed"?1:2}">${a.st}</span></div>
+ <textarea ${a.st==="Sent"?"disabled":""} onchange="adv['${key}'].text=this.value;adv['${key}'].st='Draft'">${a.text}</textarea>
+ <div class="row" style="margin-top:10px"><button class="btn ghost" ${a.st!=="Draft"||!canR?"disabled":""} onclick="step('${key}','Reviewed','${k}')">Approve</button>
+ <button class="btn" ${a.st!=="Reviewed"||!canR?"disabled":""} onclick="step('${key}','Sent','${k}')">Send warning</button></div>
+ ${canR?"":`<div class="note">Sign in as Reviewer to approve and send.</div>`}</div>`}).join("")}</div>
+ <div class="card" style="margin-top:14px"><h3>Dispatch log</h3>${log.length?log.map(x=>`<div class="kv"><span>${x.t} · ${x.k} · ${x.r}</span><span>${x.s}</span></div>`).join(""):`<span class="mut">Nothing sent yet.</span>`}</div>`}
+function step(key,st,k){adv[key].st=st;log.unshift({t:new Date().toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}),k,r:reg(key.split("|")[0]).n,s:st});render()}
+
+function render(){$("#view").innerHTML=({Overview:overview,Forecasts:forecasts,"AWS Monitoring":awsView,Hotspots:hotspots,Advisories:advisories})[tab]()}
+setInterval(()=>{AWS.forEach(s=>{s.t=+(s.t+(Math.random()-.5)*.4).toFixed(2)});
+ $("#clock").textContent="Updated "+new Date().toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+ if(!$("#app").classList.contains("hidden")){if(tab==="AWS Monitoring")render();else if(tab==="Overview"&&$("#awsmini"))$("#awsmini").innerHTML=awsMini()}},4000);
+</script>
+</body>
+</html>
